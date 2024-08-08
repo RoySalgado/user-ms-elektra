@@ -1,0 +1,36 @@
+service: user-service
+
+provider:
+  name: aws
+  runtime: nodejs16.x
+  region: us-east-1
+  environment:
+    MONGODB_URI: "mongodb+srv://roysalgado:KEFuckOfGzDEGhOK@cluster0.ltovk.mongodb.net/elektra?retryWrites=true&w=majority"
+    JWT_SECRET: "dds98h2hh%#135hjdy43$#$#1134"
+
+functions:
+  user:
+    handler: src/handler.handler
+    events:
+      - httpApi:
+          path: /users
+          method: post
+      - httpApi:
+          path: /users
+          method: get
+      - httpApi:
+          path: /general/login
+          method: post
+      - httpApi:
+          path: /general/logout
+          method: post
+
+plugins:
+  - serverless-offline
+
+custom:
+  serverless-offline:
+    httpPort: 3000
+    lambdaPort: 3002
+    host: 0.0.0.0
+    stage: dev
