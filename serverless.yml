@@ -11,6 +11,8 @@ provider:
 functions:
   user:
     handler: src/handler.handler
+    layers:
+      - arn:aws:lambda:us-east-1:025066253844:layer:librariesLayout:5
     events:
       - httpApi:
           path: /users
@@ -27,6 +29,11 @@ functions:
 
 plugins:
   - serverless-offline
+
+package:
+  exclude:
+    - node_modules/**
+    - .git/**
 
 custom:
   serverless-offline:
