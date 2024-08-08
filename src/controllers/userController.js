@@ -37,3 +37,33 @@ exports.getUsers = async (req, res, next) => {
     next(err);
   }
 };
+
+exports.getUserById = async (req, res, next) => {
+  try {
+    let id = req.params.id;
+
+    if (!id) {
+      return response(res, 400, 'User ID is required');
+    }
+
+    const user = await userService.getUserById(id);
+    return response(res, 200, 'User retrieved successfully', user);
+  } catch (err) {
+    return response(res, 404, err.message);
+  }
+};
+
+exports.deleteUserById = async (req, res, next) => {
+  try {
+    let id = req.params.id;
+
+    if (!id) {
+      return response(res, 400, 'User ID is required');
+    }
+
+    const deletedUser = await userService.deleteUserById(id);
+    return response(res, 200, 'User deleted successfully', deletedUser);
+  } catch (err) {
+    return response(res, 404, err.message);
+  }
+};

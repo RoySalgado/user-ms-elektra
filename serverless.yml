@@ -21,6 +21,12 @@ functions:
           path: /users
           method: get
       - httpApi:
+          path: /users/{id}
+          method: get
+      - httpApi:
+          path: /users/{id}
+          method: delete
+      - httpApi:
           path: /general/login
           method: post
       - httpApi:

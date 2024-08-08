@@ -28,7 +28,25 @@ const getUsers = async (page = 1, limit = 10) => {
   };
 };
 
+const getUserById = async (id) => {
+  const user = await User.findById(id);
+  if (!user) {
+    throw new Error('User not found');
+  }
+  return user;
+};
+
+const deleteUserById = async (id) => {
+  const deletedUser = await User.findByIdAndDelete(id);
+  if (!deletedUser) {
+    throw new Error('User not found');
+  }
+  return deletedUser;
+};
+
 module.exports = {
   createUser,
   getUsers,
+  getUserById,
+  deleteUserById,
 };
